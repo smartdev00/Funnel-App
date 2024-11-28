@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import { useState } from 'react'
+import { evaluation } from "./data/db";
+import "./App.css";
+import Card from "./components/Card";
+import { CheckText } from "./components/CheckText";
+import Modal from "./components/Modal";
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [property, setProperty] = useState<string[]>([]);
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <p className='font-bold mb-4'>Start your free evaluation now</p>
+        <div className='flex gap-4'>
+          {evaluation.map((eva) => {
+            return (
+              <Card
+                key={eva.title}
+                className={"border-4 relative w-56 " + eva.border.borderColor}
+                onClick={() => {
+                  setProperty(eva.properties);
+                }}>
+                <p className={`absolute top-0 left-0 px-1 text-sm py-0.5 ${eva.border.bgColor} ${eva.border.color}`}>
+                  {eva.border.title}
+                </p>
+                <p>{eva.title}</p>
+                <img alt='face' src={eva.icon} />
+                <div>
+                  {eva.detail.map((det) => {
+                    return <CheckText key={det} text={det} />;
+                  })}
+                </div>
+              </Card>
+            );
+          })}
+        </div>
+        {property.length !== 0 && (
+          <Modal
+            title='What type of property is it?'
+            onClose={() => {
+              setProperty([]);
+            }}
+          />
+        )}
       </div>
-      <h1 className='text-red-500'>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

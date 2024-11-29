@@ -31,6 +31,15 @@ export const RecepientInfor = {
   id: "recepient_infor",
 };
 
+export const AddressInput = {
+  title: "Please enter the address of your property",
+  type: "input",
+  id: "address_input",
+  prev: {},
+  next: RecepientInfor,
+  icon: mapAddress,
+};
+
 export const PostalInput = {
   title: "Please enter the address of your property",
   type: "input",
@@ -68,7 +77,7 @@ export const SellDate = {
   ],
 };
 
-export const BuySell = {
+export const GroundBuySell = {
   title: "What topic are you interested in?",
   type: "select",
   prev: {},
@@ -86,12 +95,30 @@ export const BuySell = {
   ],
 };
 
+export const BuySell = {
+  title: "What topic are you interested in?",
+  type: "select",
+  prev: {},
+  items: [
+    {
+      next: AddressInput,
+      title: "Sell",
+      icon: sellSvg,
+    },
+    {
+      next: {},
+      title: "Buy",
+      icon: buySvg,
+    },
+  ],
+};
+
 export const largeObjects = [
   {
     title: "Please select the plot area.",
     id: "personal_ground",
     icon: largeGround,
-    next: BuySell,
+    next: GroundBuySell,
     prev: {},
   },
 ];
@@ -100,12 +127,12 @@ export const houseTypes = {
   title: "Please select the type of your house",
   id: "House Types",
   items: [
-    { next: "large", title: "Detached house", icon: houseDetachedSvg },
-    { next: "large", title: "Apartment building", icon: houseApartmentBuildingSvg },
-    { next: "large", title: "Semi-detached house", icon: houseSemiDetachedSvg },
-    { next: "large", title: "Middle row house", icon: houseMiddleSvg },
-    { next: "large", title: "End terraced house", icon: houseEndSvg },
-    { next: "large", title: "Bungalow", icon: houseBunglowSvg },
+    { next: BuySell, title: "Detached house", icon: houseDetachedSvg },
+    { next: BuySell, title: "Apartment building", icon: houseApartmentBuildingSvg },
+    { next: BuySell, title: "Semi-detached house", icon: houseSemiDetachedSvg },
+    { next: BuySell, title: "Middle row house", icon: houseMiddleSvg },
+    { next: BuySell, title: "End terraced house", icon: houseEndSvg },
+    { next: BuySell, title: "Bungalow", icon: houseBunglowSvg },
   ],
   prev: {},
 };
@@ -115,12 +142,12 @@ export const apartmentTypes = {
   id: "House Types",
   type: "select",
   items: [
-    { next: "large", title: "Souterrain", icon: souterrain },
-    { next: "large", title: "First floor", icon: firstFloor },
-    { next: "large", title: "Top floor", icon: topFloor },
-    { next: "large", title: "Apartment", icon: apartment },
-    { next: "large", title: "Maisonette", icon: mainsonette },
-    { next: "large", title: "Loft", icon: loft },
+    { next: BuySell, title: "Souterrain", icon: souterrain },
+    { next: BuySell, title: "First floor", icon: firstFloor },
+    { next: BuySell, title: "Top floor", icon: topFloor },
+    { next: BuySell, title: "Apartment", icon: apartment },
+    { next: BuySell, title: "Maisonette", icon: mainsonette },
+    { next: BuySell, title: "Loft", icon: loft },
   ],
   prev: {},
 };
@@ -132,7 +159,7 @@ export const propertyTypes = {
     { next: largeObjects[0], title: "Land", icon: landSvg },
     { next: houseTypes, title: "House", icon: houseSvg },
     { next: apartmentTypes, title: "Apartment", icon: apartmentSvg },
-    { next: "Buy Sell", title: "Commercial", icon: commercialSvg },
+    { next: BuySell, title: "Commercial", icon: commercialSvg },
   ],
   checks: ["High-quality analysis", "Current market prices", "100% free of charge & non-binding"],
 };

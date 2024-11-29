@@ -25,10 +25,24 @@ import month6 from "../assets/month-6.svg";
 import monthNot from "../assets/month-not.svg";
 import mapAddress from "../assets/map.svg";
 
+const PersonalFinal = [
+  {
+    title: "Find your new home now with Homeday.",
+    type: "no",
+    id: "personal_buy_final",
+  },
+  {
+    type: "no",
+    id: "personal_sell_final",
+    successInquiry: true,
+  },
+];
+
 export const RecepientInfor = {
   title: "Your rating will now be created. \nWho should receive the rating?",
   type: "input",
   id: "recepient_infor",
+  next: PersonalFinal[1],
 };
 
 export const AddressInput = {
@@ -88,7 +102,7 @@ export const GroundBuySell = {
       icon: sellSvg,
     },
     {
-      next: {},
+      next: PersonalFinal[0],
       title: "Buy",
       icon: buySvg,
     },
@@ -106,7 +120,7 @@ export const BuySell = {
       icon: sellSvg,
     },
     {
-      next: {},
+      next: PersonalFinal[0],
       title: "Buy",
       icon: buySvg,
     },

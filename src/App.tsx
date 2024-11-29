@@ -11,6 +11,7 @@ import Ground from "./page/Ground";
 import PostalInput from "./page/PostalInput";
 import RecepientInfor from "./page/RecepientInfor";
 import AddressInput from "./page/AddressInput";
+import PersonalFinal from "./page/PersonalFinal";
 
 function App() {
   // const [property, setProperty] = useState<object[]>([]);
@@ -19,9 +20,9 @@ function App() {
 
   return (
     <>
-      <div>
-        <p className='font-bold mb-4'>Start your free evaluation now</p>
-        <div className='flex gap-4'>
+      <div className="flex flex-col w-screen justify-center">
+        <p className='font-bold mb-4 text-center'>Start your free evaluation now</p>
+        <div className='flex gap-4 justify-center'>
           {evaluation.items.map((eva) => {
             return (
               <Card
@@ -80,10 +81,19 @@ function App() {
 
             {modalData?.id === "personal_ground" && <Ground />}
             {modalData?.id === "postal_input" && <PostalInput />}
-            {modalData?.id === "recepient_infor" && <RecepientInfor />}
+            {modalData?.id === "recepient_infor" && (
+              <RecepientInfor
+                onClick={() => {
+                  setPrev([...prev, modalData]);
+                  setModalData(modalData?.next);
+                }}></RecepientInfor>
+            )}
             {modalData?.id === "address_input" && <AddressInput />}
+            {(modalData?.id === "personal_buy_final" || modalData?.id === "personal_sell_final") && (
+              <PersonalFinal data={modalData} />
+            )}
 
-            <div className='flex justify-between w-[90%] items-center mx-[5%] h-16'>
+            <div className='justify-self-end flex justify-between w-[96%] items-center h-16'>
               {prev?.length > 0 && (
                 <button
                   className='justify-self-start'

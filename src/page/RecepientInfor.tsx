@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-const RecepientInfor = ({ value }: { value?: number }) => {
+const RecepientInfor = ({ value, onClick }: { value?: number; onClick: () => void }) => {
   return (
     <div className='flex flex-col items-start w-full flex-auto'>
       <div className='flex items-start gap-10 w-full h-[232px]'>
@@ -23,14 +23,14 @@ const RecepientInfor = ({ value }: { value?: number }) => {
                 <MenuItem value={20}>Female</MenuItem>
               </Select>
             </FormControl>
-            <TextField label="Recepient Name" variant='filled' className='w-full' />
+            <TextField label='Recepient Name' variant='filled' className='w-full' />
           </div>
-          <TextField label="Telephone number*" variant='filled' />
-          <TextField label="Email*" variant='filled' />
+          <TextField label='Telephone number*' variant='filled' />
+          <TextField label='Email*' variant='filled' />
         </div>
         <img alt='map' src={estimation} className='w-80' />
       </div>
-      <div className="flex gap-2">
+      <div className='flex gap-2'>
         <span className='text-xs leading-tight'>
           I accept the terms and conditions and agree to be informed by Homeday GmbH by e-mail and telephone about the
           value of the property. I can object to this at any time by sending an e-mail to widerruf@homeday.de. I agree
@@ -38,8 +38,10 @@ const RecepientInfor = ({ value }: { value?: number }) => {
           price. The Homeday privacy policy applies.
         </span>
       </div>
-      <button className="bg-gray-200 self-center mt-2">Receive a free evaluation</button>
-    </div> 
+      <button className='bg-gray-200 self-center mt-2' onClick={onClick}>
+        Receive a free evaluation
+      </button>
+    </div>
   );
 };
 

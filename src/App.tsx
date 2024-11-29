@@ -1,15 +1,16 @@
 // import { useState } from 'react'
-import { evaluation, personalProps } from "./data/db";
+import { evaluation } from "./data/db";
 import "./App.css";
 import Card from "./components/Card";
 import { CheckText } from "./components/CheckText";
 import Modal from "./components/Modal";
 import { ArrowBack } from "@mui/icons-material";
 import { useState } from "react";
-import { Button, Slider } from "@mui/material";
+import { Button } from "@mui/material";
 import Ground from "./page/Ground";
 import PostalInput from "./page/PostalInput";
 import RecepientInfor from "./page/RecepientInfor";
+import AddressInput from "./page/AddressInput";
 
 function App() {
   // const [property, setProperty] = useState<object[]>([]);
@@ -80,6 +81,7 @@ function App() {
             {modalData?.id === "personal_ground" && <Ground />}
             {modalData?.id === "postal_input" && <PostalInput />}
             {modalData?.id === "recepient_infor" && <RecepientInfor />}
+            {modalData?.id === "address_input" && <AddressInput />}
 
             <div className='flex justify-between w-[90%] items-center mx-[5%] h-16'>
               {prev?.length > 0 && (

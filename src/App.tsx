@@ -8,6 +8,8 @@ import { ArrowBack } from "@mui/icons-material";
 import { useState } from "react";
 import { Button, Slider } from "@mui/material";
 import Ground from "./page/Ground";
+import PostalInput from "./page/PostalInput";
+import RecepientInfor from "./page/RecepientInfor";
 
 function App() {
   // const [property, setProperty] = useState<object[]>([]);
@@ -76,11 +78,13 @@ function App() {
             )}
 
             {modalData?.id === "personal_ground" && <Ground />}
+            {modalData?.id === "postal_input" && <PostalInput />}
+            {modalData?.id === "recepient_infor" && <RecepientInfor />}
 
-            <div className='absolute bottom-10 flex justify-between w-[90%] items-center mx-[5%]'>
+            <div className='flex justify-between w-[90%] items-center mx-[5%] h-16'>
               {prev?.length > 0 && (
                 <button
-                  className='self-start'
+                  className='justify-self-start'
                   onClick={() => {
                     setModalData(prev[prev.length - 1]);
                     const temp = prev;
@@ -94,7 +98,7 @@ function App() {
                 <Button
                   variant='contained'
                   size='large'
-                  className='self-end !font-bold'
+                  className='!justify-self-start !font-bold'
                   onClick={() => {
                     setPrev([...prev, modalData]);
                     setModalData(modalData?.next);

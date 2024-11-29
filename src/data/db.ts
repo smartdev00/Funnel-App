@@ -23,6 +23,22 @@ import month1_3 from "../assets/month-1-3.svg";
 import month4_6 from "../assets/month-4-6.svg";
 import month6 from "../assets/month-6.svg";
 import monthNot from "../assets/month-not.svg";
+import mapAddress from "../assets/map.svg";
+
+export const RecepientInfor = {
+  title: "Your rating will now be created. \nWho should receive the rating?",
+  type: "input",
+  id: "recepient_infor",
+};
+
+export const PostalInput = {
+  title: "Please enter the address of your property",
+  type: "input",
+  id: "postal_input",
+  prev: {},
+  next: RecepientInfor,
+  icon: mapAddress,
+};
 
 export const SellDate = {
   title: "When would you like to sell your property?",
@@ -32,22 +48,22 @@ export const SellDate = {
     {
       title: "1 - 3 Month",
       icon: month1_3,
-      next: {},
+      next: PostalInput,
     },
     {
       title: "4 - 6 Month",
       icon: month4_6,
-      next: {},
+      next: PostalInput,
     },
     {
       title: "> 6 Month",
       icon: month6,
-      next: {},
+      next: PostalInput,
     },
     {
       title: "No sale planned",
       icon: monthNot,
-      next: {},
+      next: PostalInput,
     },
   ],
 };

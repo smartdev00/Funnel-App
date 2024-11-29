@@ -11,8 +11,8 @@ const Card = ({
   onClick,
 }: {
   children: React.ReactNode;
-  className: string;
-  onClick: () => void;
+  className?: string;
+  onClick?: () => void;
 }) => {
   return (
     <div

@@ -15,18 +15,18 @@ import PersonalFinal from "./page/PersonalFinal";
 import StairInput from "./page/StairInput";
 
 function App() {
-  // const [property, setProperty] = useState<object[]>([]);
   const [modalData, setModalData] = useState<any>();
   const [progress, setProgress] = useState<number>(0);
-  const [prev, setPrev] = useState<any>([]);
+  const [history, setHistory] = useState<any>([]);
 
+  const [realEstate, setRealEstate] = useState<Object>({})
   const [testCheckValue, setTestCheckValue] = useState<boolean>(false);
 
   useEffect(() => {
-    setProgress(prev.length * 5 + 5);
+    setProgress(history.length * 5 + 5);
     if (modalData?.layer === "final") setProgress(100);
-    console.log(prev);
-  }, [prev]);
+    console.log(history);
+  }, [history]);
 
   const onCheckBoxClicked = () => {
     setTestCheckValue(!testCheckValue);
@@ -67,7 +67,7 @@ function App() {
             setData={setModalData}
             onClose={() => {
               setModalData("");
-              setPrev([]);
+              setHistory([]);
             }}>
             {modalData.items && (
               <div className='w-[100%]'>
@@ -84,7 +84,7 @@ function App() {
                       <Card
                         key={index}
                         onClick={() => {
-                          setPrev([...prev, modalData]);
+                          item?.type !== "check" && setHistory([...history, modalData]);
                           item?.type === "check" ? onCheckBoxClicked() : setModalData(item.next);
                         }}
                         className='flex-1 w-full h-[150px] relative'>
@@ -110,17 +110,19 @@ function App() {
             )}
             {(modalData?.id === "personal_ground_area" ||
               modalData?.id === "fast_ground_area" ||
-              modalData?.id === "fast_room_large" ||
+              modalData?.id === "fast_room_area" ||
               modalData?.id === "fast_house_area" ||
               modalData?.id === "fast_apartment_area" ||
-              modalData?.id === "fast_built_year") && <Ground type={modalData?.id} />}
+              modalData?.id === "fast_built_year") && (
+              <Ground type={modalData?.id} min={modalData?.min} max={modalData?.max} />
+            )}
             {(modalData?.id === "personal_ground_postal_input" || modalData?.id === "fast_ground_postal_input") && (
               <PostalInput type={modalData?.id} />
             )}
             {modalData?.id === "recepient_infor" && (
               <RecepientInfor
                 onClick={() => {
-                  setPrev([...prev, modalData]);
+                  setHistory([...history, modalData]);
                   setModalData(modalData?.next);
                 }}></RecepientInfor>
             )}
@@ -132,14 +134,14 @@ function App() {
             )}
 
             <div className='justify-self-end flex justify-between w-[96%] items-center h-16'>
-              {prev?.length > 0 && (
+              {history?.length > 0 && (
                 <button
                   className='justify-self-start'
                   onClick={() => {
-                    setModalData(prev[prev.length - 1]);
-                    const temp = [...prev];
+                    setModalData(history[history.length - 1]);
+                    const temp = [...history];
                     temp.pop();
-                    setPrev(temp);
+                    setHistory(temp);
                   }}>
                   <ArrowBack />
                 </button>
@@ -150,7 +152,7 @@ function App() {
                   size='large'
                   className='!justify-self-start !font-bold'
                   onClick={() => {
-                    setPrev([...prev, modalData]);
+                    setHistory([...history, modalData]);
                     setModalData(modalData?.next);
                   }}>
                   Next

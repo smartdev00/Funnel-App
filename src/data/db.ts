@@ -24,6 +24,30 @@ import month4_6 from "../assets/month-4-6.svg";
 import month6 from "../assets/month-6.svg";
 import monthNot from "../assets/month-not.svg";
 import mapAddress from "../assets/map.svg";
+import balcony from "../assets/exterior/exterior-balcony.png";
+import garage from "../assets/exterior/exterior-garage.jpg";
+import garden from "../assets/exterior/exterior-garden.jpg";
+import solar from "../assets/exterior/exterior-solar.jpg";
+import park from "../assets/exterior/exterior-park.jpg";
+import terrace from "../assets/exterior/exterior-terrace.jpg";
+import modernize1_3 from "../assets/modernize/modernize-1-3.jpg";
+import modernize4_9 from "../assets/modernize/modernize-4-9.jpg";
+import modernize10_15 from "../assets/modernize/modernize-10-15.jpg";
+import modernize15 from "../assets/modernize/modernize-15.jpg";
+import modernizeNot from "../assets/modernize/modernize-not.jpg";
+import interiorElevator from "../assets/interior/interior-elevator.jpg";
+import interiorAttic from "../assets/interior/interior-attic.png";
+import interiorCellar from "../assets/interior/interior-cellar.jpg";
+import interiorFireplace from "../assets/interior/interior-fireplace.png";
+import interiorKitchen from "../assets/interior/interior-kitchen.png";
+import interiorParquet from "../assets/interior/interior-parquet.png";
+import qualitySimple from "../assets/quality/quality-simple.png";
+import qualityNormal from "../assets/quality/quality-normal.jpg";
+import qualityUpscale from "../assets/quality/quality-upscale.png";
+import qualityLuxury from "../assets/quality/quality-luxury.png";
+import purposeOwn from "../assets/purpose/purpose-self.jpg";
+import purposeVarcant from "../assets/purpose/purpose-varcant.png";
+import purposeRented from "../assets/purpose/purpose-rented.png";
 
 const PersonalFinal = [
   {
@@ -225,9 +249,9 @@ const UsingReason = {
   id: "fast_using_reason",
   type: "select",
   items: [
-    { title: "Own use", icon: "", next: BuySell[1] },
-    { title: "Vacant", icon: "", next: BuySell[1] },
-    { title: "Rented", icon: "", next: BuySell[1] },
+    { title: "Own use", icon: purposeOwn, next: BuySell[1] },
+    { title: "Vacant", icon: purposeVarcant, next: BuySell[1] },
+    { title: "Rented", icon: purposeRented, next: BuySell[1] },
   ],
 };
 
@@ -236,10 +260,10 @@ const EquipmentQuality = {
   id: "fast_equipment_quality",
   type: "select",
   items: [
-    { title: "Simple", icon: "", next: UsingReason },
-    { title: "Normal", icon: "", next: UsingReason },
-    { title: "Upscale", icon: "", next: UsingReason },
-    { title: "Luxurious", icon: "", next: UsingReason },
+    { title: "Simple", icon: qualitySimple, next: UsingReason },
+    { title: "Normal", icon: qualityNormal, next: UsingReason },
+    { title: "Upscale", icon: qualityUpscale, next: UsingReason },
+    { title: "Luxurious", icon: qualityLuxury, next: UsingReason },
   ],
 };
 
@@ -249,12 +273,12 @@ const InteriorFeature = {
   id: "fast_interior_feature",
   type: "check",
   items: [
-    { title: "Elevator", icon: "", type: "check", name: "elevator" },
-    { title: "Attic", icon: "", type: "check", name: "attic" },
-    { title: "Fitted kitchen", icon: "", type: "check", name: "kitchen" },
-    { title: "Fireplace", icon: "", type: "check", name: "fireplace" },
-    { title: "Cellar", icon: "", type: "check", name: "cellar" },
-    { title: "Parquet flooring", icon: "", type: "check", name: "parquet" },
+    { title: "Elevator", icon: interiorElevator, type: "check", name: "elevator" },
+    { title: "Attic", icon: interiorAttic, type: "check", name: "attic" },
+    { title: "Fitted kitchen", icon: interiorKitchen, type: "check", name: "kitchen" },
+    { title: "Fireplace", icon: interiorFireplace, type: "check", name: "fireplace" },
+    { title: "Cellar", icon: interiorCellar, type: "check", name: "cellar" },
+    { title: "Parquet flooring", icon: interiorParquet, type: "check", name: "parquet" },
   ],
 };
 
@@ -264,12 +288,12 @@ const ExteriorFeature = {
   id: "fast_exterior_feature",
   type: "check",
   items: [
-    { icon: "", title: "Balcony", type: "check", name: "balcony" },
-    { icon: "", title: "Garage parking space", type: "check", name: "garage" },
-    { icon: "", title: "Garden", type: "check", name: "garden" },
-    { icon: "", title: "Solar system", type: "check", name: "solar" },
-    { icon: "", title: "Pitch", type: "check", name: "pitch" },
-    { icon: "", title: "Terrace", type: "check", name: "terrace" },
+    { icon: balcony, title: "Balcony", type: "check", name: "balcony" },
+    { icon: garage, title: "Garage parking space", type: "check", name: "garage" },
+    { icon: garden, title: "Garden", type: "check", name: "garden" },
+    { icon: solar, title: "Solar system", type: "check", name: "solar" },
+    { icon: park, title: "Pitch", type: "check", name: "pitch" },
+    { icon: terrace, title: "Terrace", type: "check", name: "terrace" },
   ],
 };
 
@@ -281,27 +305,27 @@ export const ModernizedYear = {
     {
       next: ExteriorFeature,
       title: "1 - 3 years ago",
-      icon: sellSvg,
+      icon: modernize1_3,
     },
     {
       next: ExteriorFeature,
       title: "4 - 9 years ago",
-      icon: sellSvg,
+      icon: modernize4_9,
     },
     {
       next: ExteriorFeature,
       title: "10 - 15 years ago",
-      icon: sellSvg,
+      icon: modernize10_15,
     },
     {
       next: ExteriorFeature,
       title: "More than 15 years ago",
-      icon: sellSvg,
+      icon: modernize15,
     },
     {
       next: ExteriorFeature,
       title: "Never before",
-      icon: sellSvg,
+      icon: modernizeNot,
     },
   ],
 };
@@ -311,13 +335,17 @@ export const BuiltYear = {
   semiTitle: "If you do not know the exact year, please enter an estimate.",
   next: ModernizedYear,
   id: "fast_built_year",
+  min: 1850,
+  max: new Date().getFullYear(),
 };
 
 export const RoomLarge = {
   title: "How large is the living space?",
   semiTitle: "If you do not know the exact value, please enter an estimate.",
   next: BuiltYear,
-  id: "fast_room_large",
+  id: "fast_room_area",
+  min: 0,
+  max: 1000,
 };
 
 const RoomCount = {
@@ -334,6 +362,8 @@ export const largeObjects = [
     icon: largeGround,
     next: GroundBuySell[0],
     prev: {},
+    min: 100,
+    max: 3000,
   },
   {
     title: "How large is your property?",
@@ -341,6 +371,8 @@ export const largeObjects = [
     id: "fast_ground_area",
     next: GroundBuySell[1],
     prev: {},
+    min: 0,
+    max: 5000,
   },
   {
     title: "How large is your property?",
@@ -348,6 +380,8 @@ export const largeObjects = [
     id: "fast_house_area",
     next: RoomLarge,
     prev: {},
+    min: 0,
+    max: 5000,
   },
   {
     title: "How big is your apartment?",
@@ -355,6 +389,8 @@ export const largeObjects = [
     id: "fast_apartment_area",
     next: RoomCount,
     prev: {},
+    min: 0,
+    max: 1000,
   },
 ];
 

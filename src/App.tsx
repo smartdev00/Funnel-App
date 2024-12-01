@@ -105,10 +105,14 @@ function App() {
               </div>
             )}
 
-            <StairInput/>
-            {(modalData?.id === "personal_ground" ||
-              modalData?.id === "fast_ground" ||
+            {(modalData?.id === "room_count" || modalData?.id === "floor_count" || modalData?.id === "which_floor") && (
+              <StairInput />
+            )}
+            {(modalData?.id === "personal_ground_area" ||
+              modalData?.id === "fast_ground_area" ||
               modalData?.id === "fast_room_large" ||
+              modalData?.id === "fast_house_area" ||
+              modalData?.id === "fast_apartment_area" ||
               modalData?.id === "fast_built_year") && <Ground type={modalData?.id} />}
             {(modalData?.id === "personal_ground_postal_input" || modalData?.id === "fast_ground_postal_input") && (
               <PostalInput type={modalData?.id} />
@@ -120,7 +124,9 @@ function App() {
                   setModalData(modalData?.next);
                 }}></RecepientInfor>
             )}
-            {(modalData?.id === "personal_address_input" || modalData?.id === "fast_address_input") && <AddressInput type={modalData?.id} />}
+            {(modalData?.id === "personal_address_input" || modalData?.id === "fast_address_input") && (
+              <AddressInput type={modalData?.id} />
+            )}
             {(modalData?.id === "personal_buy_final" || modalData?.id === "personal_sell_final") && (
               <PersonalFinal data={modalData} />
             )}

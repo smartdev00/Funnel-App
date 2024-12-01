@@ -320,10 +320,17 @@ export const RoomLarge = {
   id: "fast_room_large",
 };
 
+const RoomCount = {
+  title: "How many rooms does your apartment have?",
+  semiTitle: "You can also enter half rooms. The bathroom and kitchen do not count as rooms.",
+  id: "room_count",
+  next: BuiltYear,
+};
+
 export const largeObjects = [
   {
     title: "Please select the plot area.",
-    id: "personal_ground",
+    id: "personal_ground_area",
     icon: largeGround,
     next: GroundBuySell[0],
     prev: {},
@@ -331,18 +338,37 @@ export const largeObjects = [
   {
     title: "How large is your property?",
     semiTitle: "If you do not know the exact value, please enter an estimate.",
-    id: "fast_ground",
+    id: "fast_ground_area",
     next: GroundBuySell[1],
     prev: {},
   },
   {
     title: "How large is your property?",
     semiTitle: "If you do not know the exact value, please enter an estimate.",
-    id: "fast_ground",
+    id: "fast_house_area",
     next: RoomLarge,
     prev: {},
   },
+  {
+    title: "How big is your apartment?",
+    semiTitle: "If you do not know the exact value, please enter an estimate.",
+    id: "fast_apartment_area",
+    next: RoomCount,
+    prev: {},
+  },
 ];
+
+const FloorCount = {
+  title: "How many floors does the building have in total?",
+  id: "floor_count",
+  next: largeObjects[3],
+};
+
+const WhichFloor = {
+  title: "On which floor is the apartment located?",
+  id: "which_floor",
+  next: FloorCount,
+};
 
 export const houseTypes = [
   {
@@ -393,12 +419,12 @@ export const apartmentTypes = [
     id: "Fast Apartment",
     type: "select",
     items: [
-      { next: BuySell[0], title: "Souterrain", icon: souterrain },
-      { next: BuySell[0], title: "First floor", icon: firstFloor },
-      { next: BuySell[0], title: "Top floor", icon: topFloor },
-      { next: BuySell[0], title: "Apartment", icon: apartment },
-      { next: BuySell[0], title: "Maisonette", icon: mainsonette },
-      { next: BuySell[0], title: "Loft", icon: loft },
+      { next: largeObjects[3], title: "Souterrain", icon: souterrain },
+      { next: FloorCount, title: "First floor", icon: firstFloor },
+      { next: WhichFloor, title: "Top floor", icon: topFloor },
+      { next: WhichFloor, title: "Apartment", icon: apartment },
+      { next: WhichFloor, title: "Maisonette", icon: mainsonette },
+      { next: WhichFloor, title: "Loft", icon: loft },
     ],
     prev: {},
   },

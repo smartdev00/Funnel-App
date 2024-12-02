@@ -58,7 +58,7 @@ const PersonalFinal = [
   },
   {
     type: "no",
-    id: "personal_sell_final",
+    id: "alternative_phone_number",
     successInquiry: true,
     layer: "final",
   },
@@ -209,11 +209,13 @@ export const GroundBuySell = [
         next: SellDate[1],
         title: "Sell",
         icon: sellSvg,
+        text: "Sell",
       },
       {
         next: PersonalFinal[0],
         title: "Buy",
         icon: buySvg,
+        text: "Buy",
       },
     ],
   },
@@ -223,34 +225,40 @@ export const BuySell = [
   {
     title: "What topic are you interested in?",
     type: "select",
+    id: "personal_house_buy_sell",
     prev: {},
     items: [
       {
         next: AddressInput[0],
         title: "Sell",
         icon: sellSvg,
+        text: "Sell",
       },
       {
         next: PersonalFinal[0],
         title: "Buy",
         icon: buySvg,
+        text: "Buy",
       },
     ],
   },
   {
     title: "What do you need the real estate valuation for?",
     type: "select",
+    id: "fast_house_buy_sell",
     prev: {},
     items: [
       {
         next: SellDate[1],
         title: "Sell",
         icon: sellSvg,
+        text: "Sell",
       },
       {
         next: PersonalFinal[0],
         title: "Buy",
         icon: buySvg,
+        text: "Buy",
       },
     ],
   },
@@ -261,9 +269,9 @@ const UsingReason = {
   id: "fast_using_reason",
   type: "select",
   items: [
-    { title: "Own use", icon: purposeOwn, next: BuySell[1] },
-    { title: "Vacant", icon: purposeVarcant, next: BuySell[1] },
-    { title: "Rented", icon: purposeRented, next: BuySell[1] },
+    { title: "Own use", icon: purposeOwn, next: BuySell[1], text: "Own user" },
+    { title: "Vacant", icon: purposeVarcant, next: BuySell[1], text: "Vacant" },
+    { title: "Rented", icon: purposeRented, next: BuySell[1], text: "Rented" },
   ],
 };
 
@@ -272,10 +280,10 @@ const EquipmentQuality = {
   id: "fast_equipment_quality",
   type: "select",
   items: [
-    { title: "Simple", icon: qualitySimple, next: UsingReason },
-    { title: "Normal", icon: qualityNormal, next: UsingReason },
-    { title: "Upscale", icon: qualityUpscale, next: UsingReason },
-    { title: "Luxurious", icon: qualityLuxury, next: UsingReason },
+    { title: "Simple", icon: qualitySimple, next: UsingReason, text: "Simple" },
+    { title: "Normal", icon: qualityNormal, next: UsingReason, text: "Normal" },
+    { title: "Upscale", icon: qualityUpscale, next: UsingReason, text: "Upscale" },
+    { title: "Luxurious", icon: qualityLuxury, next: UsingReason, text: "Luxurious" },
   ],
 };
 
@@ -318,26 +326,31 @@ export const ModernizedYear = {
       next: ExteriorFeature,
       title: "1 - 3 years ago",
       icon: modernize1_3,
+      text: "1-3",
     },
     {
       next: ExteriorFeature,
       title: "4 - 9 years ago",
       icon: modernize4_9,
+      text: "4-9",
     },
     {
       next: ExteriorFeature,
       title: "10 - 15 years ago",
       icon: modernize10_15,
+      text: "10-15",
     },
     {
       next: ExteriorFeature,
       title: "More than 15 years ago",
       icon: modernize15,
+      text: "15-",
     },
     {
       next: ExteriorFeature,
       title: "Never before",
       icon: modernizeNot,
+      text: "not",
     },
   ],
 };
@@ -458,6 +471,13 @@ export const houseTypes = [
   },
 ];
 
+/**
+ * Prev -> evaluation.item1
+ * item1.next -> largeObjects[0]
+ * item2.next -> houseTypes
+ * item3.next -> apartmentTypes
+ * item4.next -> BuySell
+ */
 export const apartmentTypes = [
   {
     title: "Please select the type of your house",

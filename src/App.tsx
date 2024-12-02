@@ -13,19 +13,18 @@ import RecepientInfor from "./page/RecepientInfor";
 import AddressInput from "./page/AddressInput";
 import PersonalFinal from "./page/PersonalFinal";
 import StairInput from "./page/StairInput";
+import { hasError, isNullOrUndefined } from "./utils/function";
 
 interface RealEstate {
   [key: string]: number | string | null | undefined | object; // Adjust this type based on your actual data structure
 }
 
-function App() {
+export default function App() {
   const [modalData, setModalData] = useState<any>();
   const [progress, setProgress] = useState<number>(0);
   const [history, setHistory] = useState<any>([]);
-  const [error, setError] = useState<string>("");
-
+  const [error, setError] = useState<any>("");
   const [realEstate, setRealEstate] = useState<RealEstate>({});
-  const [testCheckValue, setTestCheckValue] = useState<boolean>(false);
 
   useEffect(() => {
     setProgress(history.length * 5 + 5);
@@ -36,13 +35,22 @@ function App() {
     console.log(realEstate);
   }, [realEstate]);
 
-  const onCheckBoxClicked = () => {
-    setTestCheckValue(!testCheckValue);
+  const onCheckBoxClicked = (id: string, item: any) => {
+    let temp = realEstate[id] ? realEstate[id].toString() : "";
+    console.log("temp", temp);
+    if (temp.includes(item.name)) {
+      temp = temp.replace(item.name + " ", "");
+      console.log(temp);
+    } else {
+      console.log("Set", item.name);
+      temp += item.name + " ";
+    }
+    setRealEstate({ ...realEstate, [id]: temp });
   };
 
-  const onCardInModalClick = (item: any) => {
+  const onCardInModalClick = (id: string, item: any) => {
     if (item?.type === "check") {
-      onCheckBoxClicked();
+      onCheckBoxClicked(id, item);
     } else {
       setHistory([...history, modalData]);
       setModalData(item.next);
@@ -62,6 +70,7 @@ function App() {
                 className={"border-4 relative w-56 " + eva.style.borderColor}
                 onClick={() => {
                   setModalData(eva.next);
+                  setRealEstate({ ...realEstate, [evaluation.id]: eva.text });
                   setRealEstate({ ...realEstate, [evaluation.id]: eva.text });
                 }}>
                 <p className={`absolute top-0 left-0 px-1 text-sm py-0.5 ${eva.style.bgColor} ${eva.style.color}`}>
@@ -103,13 +112,13 @@ function App() {
                     return (
                       <Card
                         key={index}
-                        onClick={() => onCardInModalClick(item)}
+                        onClick={() => onCardInModalClick(modalData?.id, item)}
                         className='flex-1 w-full h-[150px] relative'>
                         {modalData?.type === "check" && (
                           <input
                             type='checkbox'
-                            onClick={onCheckBoxClicked}
-                            checked={testCheckValue}
+                            onChange={() => onCheckBoxClicked(modalData?.id, item)}
+                            checked={realEstate[modalData?.id]?.toString()?.includes(item.name)}
                             className='absolute right-2 bottom-2'
                           />
                         )}
@@ -123,7 +132,7 @@ function App() {
             )}
 
             {(modalData?.id === "room_count" || modalData?.id === "floor_count" || modalData?.id === "which_floor") && (
-              <StairInput />
+              <StairInput realEstate={realEstate} setRealEstate={setRealEstate} type={modalData?.id} />
             )}
             {(modalData?.id === "personal_ground_area" ||
               modalData?.id === "fast_ground_area" ||
@@ -161,9 +170,15 @@ function App() {
                 }}></RecepientInfor>
             )}
             {(modalData?.id === "personal_address_input" || modalData?.id === "fast_address_input") && (
-              <AddressInput type={modalData?.id} realEstate={realEstate} setRealEstate={setRealEstate} />
+              <AddressInput
+                type={modalData?.id}
+                realEstate={realEstate}
+                setRealEstate={setRealEstate}
+                error={error}
+                setError={setError}
+              />
             )}
-            {(modalData?.id === "personal_buy_final" || modalData?.id === "personal_sell_final") && (
+            {(modalData?.id === "personal_buy_final" || modalData?.id === "alternative_phone_number") && (
               <PersonalFinal type={modalData?.id} realEstate={realEstate} setRealEstate={setRealEstate} />
             )}
 
@@ -186,8 +201,31 @@ function App() {
                   size='large'
                   className='!justify-self-start !font-bold'
                   onClick={() => {
-                    setHistory([...history, modalData]);
-                    setModalData(modalData?.next);
+                    if (modalData?.id === "fast_exterior_feature" || modalData?.id === "fast_interior_feature") {
+                      setHistory([...history, modalData]);
+                      setModalData(modalData?.next);
+                    } else {
+                      let tempError = error;
+
+                      const hasNull = isNullOrUndefined(realEstate);
+                      if (hasNull.error) {
+                        tempError = { ...tempError, [hasNull.key]: "Required" };
+                        setError(tempError);
+                      }
+
+                      const childHasNull = isNullOrUndefined(realEstate[modalData?.id]);
+                      if (childHasNull.error) {
+                        tempError = { ...tempError, [childHasNull.key]: "Required" };
+                        setError(tempError);
+                      } else if (!hasError(tempError)) {
+                        setError("");
+                        if (!hasError(tempError)) {
+                          setHistory([...history, modalData]);
+                          setModalData(modalData?.next);
+                        }
+                      }
+                      console.log(hasError(tempError), tempError, error);
+                    }
                   }}>
                   Next
                 </Button>
@@ -204,5 +242,3 @@ function App() {
     </>
   );
 }
-
-export default App;

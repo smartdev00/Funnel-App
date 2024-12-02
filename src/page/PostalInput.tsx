@@ -1,7 +1,8 @@
 import { LocationOn } from "@mui/icons-material";
 import map from "../assets/map.svg";
 import { TextField } from "@mui/material";
-import { isInteger } from "../utils/functioni";
+import { isInteger } from "../utils/function";
+import { useEffect } from "react";
 
 interface RealEstate {
   [key: string]: number | string | null | undefined | object; // Adjust this type based on your actual data structure
@@ -17,9 +18,13 @@ const PostalInput = ({
   type: string;
   realEstate: RealEstate;
   setRealEstate: React.Dispatch<React.SetStateAction<RealEstate>>;
-  error: string;
-  setError: React.Dispatch<React.SetStateAction<string>>;
+  error: any;
+  setError: React.Dispatch<React.SetStateAction<any>>;
 }) => {
+  useEffect(() => {
+    setRealEstate({ ...realEstate, [type]: "" });
+  }, []);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (!isInteger(e.target.value)) {
       setError("Postal Code must be integer.");
@@ -39,8 +44,8 @@ const PostalInput = ({
             variant='filled'
             label='Enter postal code'
             value={realEstate[type] ? realEstate[type] : ""}
-            error={error !== ""}
-            helperText={error}
+            error={!!error[type]}
+            helperText={error[type]}
             onChange={onChange}
           />
           <p>The location of your property forms the basis for an accurate valuation.</p>
@@ -55,8 +60,8 @@ const PostalInput = ({
           variant='filled'
           label='Enter postal code'
           value={realEstate[type] ? realEstate[type] : ""}
-          error={error !== ""}
-          helperText={error}
+          error={!!error[type]}
+          helperText={error[type]}
           onChange={onChange}
         />
       </div>

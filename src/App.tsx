@@ -71,6 +71,7 @@ export default function App() {
                 onClick={() => {
                   setModalData(eva.next);
                   setRealEstate({ ...realEstate, [evaluation.id]: eva.text });
+                  setRealEstate({ ...realEstate, [evaluation.id]: eva.text });
                 }}>
                 <p className={`absolute top-0 left-0 px-1 text-sm py-0.5 ${eva.style.bgColor} ${eva.style.color}`}>
                   {eva.style.title}

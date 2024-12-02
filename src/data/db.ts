@@ -471,6 +471,13 @@ export const houseTypes = [
   },
 ];
 
+/**
+ * Prev -> evaluation.item1
+ * item1.next -> largeObjects[0]
+ * item2.next -> houseTypes
+ * item3.next -> apartmentTypes
+ * item4.next -> BuySell
+ */
 export const apartmentTypes = [
   {
     title: "Please select the type of your house",

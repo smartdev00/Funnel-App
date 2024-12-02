@@ -48,7 +48,7 @@ const Ground = ({
 
   const onSlideChange = (e: Event, value: number | number[]) => {
     setRealEstate({ ...realEstate, [type]: value as number });
-    setError(e.target);
+    setError("");
   };
   return type === "personal_ground_area" ? (
     <div className='border flex flex-col justify-center items-center px-5 py-3'>
@@ -110,4 +110,3 @@ const Ground = ({
 };
 
 export default Ground;
-

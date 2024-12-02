@@ -2,7 +2,7 @@ import faceSvg from "../assets/face.svg";
 import mobileHandSvg from "../assets/mobile-hand.svg";
 import landSvg from "../assets/land.svg";
 import houseSvg from "../assets/house.svg";
-import apartmentSvg from "../assets/apartment.svg";
+import apartmentSvg from "../assets/apartment-building.svg";
 import commercialSvg from "../assets/commercial.svg";
 import houseDetachedSvg from "../assets/house-detached.svg";
 import houseSemiDetachedSvg from "../assets/house-semi-detached.svg";
@@ -58,7 +58,7 @@ const PersonalFinal = [
   },
   {
     type: "no",
-    id: "personal_sell_final",
+    id: "alternative_phone_number",
     successInquiry: true,
     layer: "final",
   },
@@ -209,11 +209,13 @@ export const GroundBuySell = [
         next: SellDate[1],
         title: "Sell",
         icon: sellSvg,
+        text: "Sell",
       },
       {
         next: PersonalFinal[0],
         title: "Buy",
         icon: buySvg,
+        text: "Buy",
       },
     ],
   },
@@ -223,12 +225,14 @@ export const BuySell = [
   {
     title: "What topic are you interested in?",
     type: "select",
+    id: "personal_house_buy_sell",
     prev: {},
     items: [
       {
         next: AddressInput[0],
         title: "Sell",
         icon: sellSvg,
+        text: "Sell",
       },
       {
         next: PersonalFinal[0],
@@ -241,17 +245,20 @@ export const BuySell = [
   {
     title: "What do you need the real estate valuation for?",
     type: "select",
+    id: "fast_house_buy_sell",
     prev: {},
     items: [
       {
         next: SellDate[1],
         title: "Sell",
         icon: sellSvg,
+        text: "Sell",
       },
       {
         next: PersonalFinal[0],
         title: "Buy",
         icon: buySvg,
+        text: "Buy",
       },
     ],
   },
@@ -262,9 +269,9 @@ const UsingReason = {
   id: "fast_using_reason",
   type: "select",
   items: [
-    { title: "Own use", icon: purposeOwn, next: BuySell[1] },
-    { title: "Vacant", icon: purposeVarcant, next: BuySell[1] },
-    { title: "Rented", icon: purposeRented, next: BuySell[1] },
+    { title: "Own use", icon: purposeOwn, next: BuySell[1], text: "Own user" },
+    { title: "Vacant", icon: purposeVarcant, next: BuySell[1], text: "Vacant" },
+    { title: "Rented", icon: purposeRented, next: BuySell[1], text: "Rented" },
   ],
 };
 
@@ -273,10 +280,10 @@ const EquipmentQuality = {
   id: "fast_equipment_quality",
   type: "select",
   items: [
-    { title: "Simple", icon: qualitySimple, next: UsingReason },
-    { title: "Normal", icon: qualityNormal, next: UsingReason },
-    { title: "Upscale", icon: qualityUpscale, next: UsingReason },
-    { title: "Luxurious", icon: qualityLuxury, next: UsingReason },
+    { title: "Simple", icon: qualitySimple, next: UsingReason, text: "Simple" },
+    { title: "Normal", icon: qualityNormal, next: UsingReason, text: "Normal" },
+    { title: "Upscale", icon: qualityUpscale, next: UsingReason, text: "Upscale" },
+    { title: "Luxurious", icon: qualityLuxury, next: UsingReason, text: "Luxurious" },
   ],
 };
 
@@ -319,26 +326,31 @@ export const ModernizedYear = {
       next: ExteriorFeature,
       title: "1 - 3 years ago",
       icon: modernize1_3,
+      text: "1-3",
     },
     {
       next: ExteriorFeature,
       title: "4 - 9 years ago",
       icon: modernize4_9,
+      text: "4-9",
     },
     {
       next: ExteriorFeature,
       title: "10 - 15 years ago",
       icon: modernize10_15,
+      text: "10-15",
     },
     {
       next: ExteriorFeature,
       title: "More than 15 years ago",
       icon: modernize15,
+      text: "15-",
     },
     {
       next: ExteriorFeature,
       title: "Never before",
       icon: modernizeNot,
+      text: "not",
     },
   ],
 };
@@ -459,27 +471,88 @@ export const houseTypes = [
   },
 ];
 
-export const propertyTypes = {
+export const apartmentTypes = [
+  {
+    title: "Please select the type of your house",
+    id: "personal_apartment_type",
+    type: "select",
+    items: [
+      { next: BuySell[0], title: "Souterrain", icon: souterrain, text: "Souterrain" },
+      { next: BuySell[0], title: "First floor", icon: firstFloor, text: "First Floor" },
+      { next: BuySell[0], title: "Top floor", icon: topFloor, text: "Top Floor" },
+      { next: BuySell[0], title: "Apartment", icon: apartment, text: "Middle Floor" },
+      { next: BuySell[0], title: "Maisonette", icon: mainsonette, text: "Maisonette" },
+      { next: BuySell[0], title: "Loft", icon: loft, text: "Loft" },
+    ],
+    prev: {},
+  },
+  {
+    title: "Please select the type of your house",
+    id: "fast_apartment_type",
+    type: "select",
+    items: [
+      { next: largeObjects[3], title: "Souterrain", icon: souterrain, text: "Souterrain" },
+      { next: FloorCount, title: "First floor", icon: firstFloor, text: "First Floor" },
+      { next: WhichFloor, title: "Top floor", icon: topFloor, text: "Top Floor" },
+      { next: WhichFloor, title: "Apartment", icon: apartment, text: "Middle Floor" },
+      { next: WhichFloor, title: "Maisonette", icon: mainsonette, text: "Maisonette" },
+      { next: WhichFloor, title: "Loft", icon: loft, text: "Loft" },
+    ],
+    prev: {},
+  },
+];
+
+/**
+ * Prev -> evaluation.item1
+ * item1.next -> largeObjects[0]
+ * item2.next -> houseTypes
+ * item3.next -> apartmentTypes
+ * item4.next -> BuySell
+ */
+export const PersonalPropertyTypes = {
   title: "Which property is it?",
-  id: "1",
+  id: "personal_property_type",
   items: [
-    { next: "large", title: "Land", icon: landSvg },
-    { next: houseTypes, title: "House", icon: houseSvg },
-    { next: "Apartment Type", title: "Apartment", icon: apartmentSvg },
-    { next: "Buy Sell", title: "Commercial", icon: commercialSvg },
+    { next: largeObjects[0], title: "Land", icon: landSvg, text: "Property" },
+    { next: houseTypes[0], title: "House", icon: houseSvg, text: "House" },
+    { next: apartmentTypes[0], title: "Apartment", icon: apartmentSvg, text: "Apartment" },
+    { next: BuySell[0], title: "Commercial", icon: commercialSvg, text: "Commercial" },
   ],
   checks: ["High-quality analysis", "Current market prices", "100% free of charge & non-binding"],
 };
 
+/**
+ * Prev -> evaluation.item1
+ * item1.next -> largeObjects[0]
+ * item2.next -> houseTypes
+ * item3.next -> apartmentTypes
+ */
+export const FastPropertyTypes = {
+  title: "Which property is it?",
+  id: "fast_property_type",
+  items: [
+    { next: largeObjects[1], title: "Land", icon: landSvg, text: "Property" },
+    { next: houseTypes[1], title: "House", icon: houseSvg, text: "House" },
+    { next: apartmentTypes[1], title: "Apartment", icon: apartmentSvg, text: "Apartment" },
+  ],
+  checks: ["High-quality analysis", "Current market prices", "100% free of charge & non-binding"],
+};
+
+/**
+ * Layer root
+ * item1.next -> PersonalPropertyTypes
+ * item2.next -> FastPropertyTypes
+ */
 export const evaluation = {
   title: "Start your free evaluation now",
-  id: "0",
+  id: "evaluation",
+  layer: "root",
   items: [
     {
-      id: "0-0",
-      next: propertyTypes,
+      id: "personal_rating",
+      next: PersonalPropertyTypes,
       title: "Personal Rating",
-      text: "personal",
+      text: "Personal",
       icon: faceSvg,
       checks: ["Precise", "Local", "For free"],
       style: {
@@ -490,10 +563,10 @@ export const evaluation = {
       },
     },
     {
-      id: "0-1",
-      next: propertyTypes,
-      text: "fast",
+      id: "online_review",
+      next: FastPropertyTypes,
       title: "Online Review",
+      text: "Online",
       icon: mobileHandSvg,
       checks: ["Value range", "in 2 minutes", "For free"],
       style: {
@@ -505,41 +578,3 @@ export const evaluation = {
     },
   ],
 };
-
-export const personalProps = [
-  {
-    title: "Land",
-    icon: landSvg,
-    steps: [
-      {
-        title: "Please select the plot area.",
-      },
-    ],
-  },
-  {
-    title: "House",
-    icon: houseSvg,
-    steps: [
-      {
-        title: "Please select the type of your house",
-        items: [
-          { title: "Detached house", icon: houseDetachedSvg },
-          { title: "Apartment building", icon: houseApartmentBuildingSvg },
-          { title: "Semi-detached house", icon: houseSemiDetachedSvg },
-          { title: "Middle row house", icon: houseMiddleSvg },
-          { title: "End terraced house", icon: houseEndSvg },
-          { title: "Bungalow", icon: houseBunglowSvg },
-        ],
-      },
-      {
-        title: "What topic are you interested in?",
-        items: [
-          { title: "Buy", icon: buySvg },
-          { title: "Sell", icon: sellSvg },
-        ],
-      },
-    ],
-  },
-  { title: "Apartment", icon: apartmentSvg },
-  { title: "Commercial", icon: commercialSvg },
-];

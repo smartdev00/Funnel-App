@@ -58,8 +58,6 @@ export default function App() {
     }
   };
 
-  // console.log("===Error===: ", error);
-
   return (
     <>
       <div className='flex flex-col w-screen justify-center'>
@@ -183,7 +181,6 @@ export default function App() {
               <PersonalFinal type={modalData?.id} realEstate={realEstate} setRealEstate={setRealEstate} />
             )}
 
-            {/* Back and Next button */}
             <div className='justify-self-end flex justify-between w-[96%] items-center h-16'>
               {history?.length > 0 && (
                 <button
@@ -197,7 +194,6 @@ export default function App() {
                   <ArrowBack />
                 </button>
               )}
-
               {modalData.next && modalData?.id !== "recepient_infor" && (
                 <Button
                   variant='contained'
@@ -209,18 +205,15 @@ export default function App() {
                       setModalData(modalData?.next);
                     } else {
                       let tempError = error;
-                      console.log("Error: ", tempError);
 
                       const hasNull = isNullOrUndefined(realEstate);
                       if (hasNull.error) {
-                        console.log("hasNull", hasNull);
                         tempError = { ...tempError, [hasNull.key]: "Required" };
                         setError(tempError);
                       }
 
                       const childHasNull = isNullOrUndefined(realEstate[modalData?.id]);
                       if (childHasNull.error) {
-                        console.log("childHasNull", childHasNull);
                         tempError = { ...tempError, [childHasNull.key]: "Required" };
                         setError(tempError);
                       } else if (!hasError(tempError)) {

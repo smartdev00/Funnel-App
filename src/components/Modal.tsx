@@ -2,15 +2,17 @@ import { CheckText } from "./CheckText";
 import Card from "./Card";
 
 const Modal = ({
-  title,
   onClose,
   data,
   setData,
+  progress,
+  children,
 }: {
-  title: string;
   onClose: () => void;
   data: any;
+  progress: number;
   setData: React.Dispatch<any>;
+  children: React.ReactNode;
 }) => {
   console.log(data);
   return (
@@ -34,9 +36,7 @@ const Modal = ({
           </div>
         </div>
 
-            <button>
-                prev
-            </button>
+        <button>prev</button>
         <div className='flex items-center justify-evenly'>
           {data?.checks?.map((check: any) => {
             return <CheckText text={check} key={check} />;

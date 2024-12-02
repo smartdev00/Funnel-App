@@ -114,6 +114,7 @@ export const PostalInput = [
 export const SellDate = [
   {
     title: "When would you like to sell your property?",
+    id: "personal_sell_date",
     type: "select",
     prev: {},
     items: [
@@ -121,26 +122,31 @@ export const SellDate = [
         title: "1 - 3 Month",
         icon: month1_3,
         next: PostalInput[0],
+        text: "1 - 3 Month",
       },
       {
         title: "4 - 6 Month",
         icon: month4_6,
         next: PostalInput[0],
+        text: "4 - 6 Month",
       },
       {
         title: "> 6 Month",
         icon: month6,
         next: PostalInput[0],
+        text: "> 6 Month",
       },
       {
         title: "No sale planned",
         icon: monthNot,
         next: PostalInput[0],
+        text: "No sale planned",
       },
     ],
   },
   {
     title: "In which region is your property located?",
+    id: "fast_sell_date",
     type: "select",
     prev: {},
     items: [
@@ -148,21 +154,25 @@ export const SellDate = [
         title: "1 - 3 Month",
         icon: month1_3,
         next: AddressInput[1],
+        text: "1 - 3 Month",
       },
       {
         title: "4 - 6 Month",
         icon: month4_6,
         next: AddressInput[1],
+        text: "4 - 6 Month",
       },
       {
         title: "> 6 Month",
         icon: month6,
         next: AddressInput[1],
+        text: "> 6 Month",
       },
       {
         title: "No sale planned",
         icon: monthNot,
         next: AddressInput[1],
+        text: "No sale planned",
       },
     ],
   },
@@ -179,11 +189,13 @@ export const GroundBuySell = [
         next: SellDate[0],
         title: "Sell",
         icon: sellSvg,
+        text: "Sell",
       },
       {
         next: PersonalFinal[0],
         title: "Buy",
         icon: buySvg,
+        text: "Buy",
       },
     ],
   },
@@ -362,6 +374,7 @@ export const largeObjects = [
     icon: largeGround,
     next: GroundBuySell[0],
     prev: {},
+    type: "input",
     min: 100,
     max: 3000,
   },
@@ -371,6 +384,7 @@ export const largeObjects = [
     id: "fast_ground_area",
     next: GroundBuySell[1],
     prev: {},
+    type: "input",
     min: 0,
     max: 5000,
   },
@@ -380,6 +394,7 @@ export const largeObjects = [
     id: "fast_house_area",
     next: RoomLarge,
     prev: {},
+    type: "input",
     min: 0,
     max: 5000,
   },
@@ -389,6 +404,7 @@ export const largeObjects = [
     id: "fast_apartment_area",
     next: RoomCount,
     prev: {},
+    type: "input",
     min: 0,
     max: 1000,
   },
@@ -397,39 +413,46 @@ export const largeObjects = [
 const FloorCount = {
   title: "How many floors does the building have in total?",
   id: "floor_count",
+  type: "input",
   next: largeObjects[3],
 };
 
 const WhichFloor = {
   title: "On which floor is the apartment located?",
   id: "which_floor",
+  type: "input",
   next: FloorCount,
 };
 
 export const houseTypes = [
   {
     title: "Please select the type of your house",
-    id: "personal_house",
+    id: "personal_house_type",
     items: [
-      { next: BuySell[0], title: "Detached house", icon: houseDetachedSvg },
-      { next: BuySell[0], title: "Apartment building", icon: houseApartmentBuildingSvg },
-      { next: BuySell[0], title: "Semi-detached house", icon: houseSemiDetachedSvg },
-      { next: BuySell[0], title: "Middle row house", icon: houseMiddleSvg },
-      { next: BuySell[0], title: "End terraced house", icon: houseEndSvg },
-      { next: BuySell[0], title: "Bungalow", icon: houseBunglowSvg },
+      { next: BuySell[0], title: "Detached house", icon: houseDetachedSvg, text: "Detached House" },
+      { next: BuySell[0], title: "Apartment building", icon: houseApartmentBuildingSvg, text: "Apartment Building" },
+      { next: BuySell[0], title: "Semi-detached house", icon: houseSemiDetachedSvg, text: "Semi-detached house" },
+      { next: BuySell[0], title: "Middle row house", icon: houseMiddleSvg, text: "Middle row House" },
+      { next: BuySell[0], title: "End terraced house", icon: houseEndSvg, text: "End terraced House" },
+      { next: BuySell[0], title: "Bungalow", icon: houseBunglowSvg, text: "Bungalow" },
     ],
     prev: {},
   },
   {
     title: "Please select the type of your house",
-    id: "fast_house",
+    id: "fast_house_type",
     items: [
-      { next: largeObjects[2], title: "Detached house", icon: houseDetachedSvg },
-      { next: largeObjects[2], title: "Apartment building", icon: houseApartmentBuildingSvg },
-      { next: largeObjects[2], title: "Semi-detached house", icon: houseSemiDetachedSvg },
-      { next: largeObjects[2], title: "Middle row house", icon: houseMiddleSvg },
-      { next: largeObjects[2], title: "End terraced house", icon: houseEndSvg },
-      { next: largeObjects[2], title: "Bungalow", icon: houseBunglowSvg },
+      { next: largeObjects[2], title: "Detached house", icon: houseDetachedSvg, text: "Detached House" },
+      {
+        next: largeObjects[2],
+        title: "Apartment building",
+        icon: houseApartmentBuildingSvg,
+        text: "Apartment Building",
+      },
+      { next: largeObjects[2], title: "Semi-detached house", icon: houseSemiDetachedSvg, text: "Semi-detached House" },
+      { next: largeObjects[2], title: "Middle row house", icon: houseMiddleSvg, text: "Middle row House" },
+      { next: largeObjects[2], title: "End terraced house", icon: houseEndSvg, text: "End terraced House" },
+      { next: largeObjects[2], title: "Bungalow", icon: houseBunglowSvg, text: "Bungalow" },
     ],
     prev: {},
   },
@@ -438,29 +461,29 @@ export const houseTypes = [
 export const apartmentTypes = [
   {
     title: "Please select the type of your house",
-    id: "Personal Apartment",
+    id: "personal_apartment_type",
     type: "select",
     items: [
-      { next: BuySell[0], title: "Souterrain", icon: souterrain },
-      { next: BuySell[0], title: "First floor", icon: firstFloor },
-      { next: BuySell[0], title: "Top floor", icon: topFloor },
-      { next: BuySell[0], title: "Apartment", icon: apartment },
-      { next: BuySell[0], title: "Maisonette", icon: mainsonette },
-      { next: BuySell[0], title: "Loft", icon: loft },
+      { next: BuySell[0], title: "Souterrain", icon: souterrain, text: "Souterrain" },
+      { next: BuySell[0], title: "First floor", icon: firstFloor, text: "First Floor" },
+      { next: BuySell[0], title: "Top floor", icon: topFloor, text: "Top Floor" },
+      { next: BuySell[0], title: "Apartment", icon: apartment, text: "Middle Floor" },
+      { next: BuySell[0], title: "Maisonette", icon: mainsonette, text: "Maisonette" },
+      { next: BuySell[0], title: "Loft", icon: loft, text: "Loft" },
     ],
     prev: {},
   },
   {
     title: "Please select the type of your house",
-    id: "Fast Apartment",
+    id: "fast_apartment_type",
     type: "select",
     items: [
-      { next: largeObjects[3], title: "Souterrain", icon: souterrain },
-      { next: FloorCount, title: "First floor", icon: firstFloor },
-      { next: WhichFloor, title: "Top floor", icon: topFloor },
-      { next: WhichFloor, title: "Apartment", icon: apartment },
-      { next: WhichFloor, title: "Maisonette", icon: mainsonette },
-      { next: WhichFloor, title: "Loft", icon: loft },
+      { next: largeObjects[3], title: "Souterrain", icon: souterrain, text: "Souterrain" },
+      { next: FloorCount, title: "First floor", icon: firstFloor, text: "First Floor" },
+      { next: WhichFloor, title: "Top floor", icon: topFloor, text: "Top Floor" },
+      { next: WhichFloor, title: "Apartment", icon: apartment, text: "Middle Floor" },
+      { next: WhichFloor, title: "Maisonette", icon: mainsonette, text: "Maisonette" },
+      { next: WhichFloor, title: "Loft", icon: loft, text: "Loft" },
     ],
     prev: {},
   },
@@ -475,12 +498,12 @@ export const apartmentTypes = [
  */
 export const PersonalPropertyTypes = {
   title: "Which property is it?",
-  id: "1",
+  id: "personal_property_type",
   items: [
-    { next: largeObjects[0], title: "Land", icon: landSvg },
-    { next: houseTypes[0], title: "House", icon: houseSvg },
-    { next: apartmentTypes[0], title: "Apartment", icon: apartmentSvg },
-    { next: BuySell[0], title: "Commercial", icon: commercialSvg },
+    { next: largeObjects[0], title: "Land", icon: landSvg, text: "Property" },
+    { next: houseTypes[0], title: "House", icon: houseSvg, text: "House" },
+    { next: apartmentTypes[0], title: "Apartment", icon: apartmentSvg, text: "Apartment" },
+    { next: BuySell[0], title: "Commercial", icon: commercialSvg, text: "Commercial" },
   ],
   checks: ["High-quality analysis", "Current market prices", "100% free of charge & non-binding"],
 };
@@ -493,11 +516,11 @@ export const PersonalPropertyTypes = {
  */
 export const FastPropertyTypes = {
   title: "Which property is it?",
-  id: "1",
+  id: "fast_property_type",
   items: [
-    { next: largeObjects[1], title: "Land", icon: landSvg },
-    { next: houseTypes[1], title: "House", icon: houseSvg },
-    { next: apartmentTypes[1], title: "Apartment", icon: apartmentSvg },
+    { next: largeObjects[1], title: "Land", icon: landSvg, text: "Property" },
+    { next: houseTypes[1], title: "House", icon: houseSvg, text: "House" },
+    { next: apartmentTypes[1], title: "Apartment", icon: apartmentSvg, text: "Apartment" },
   ],
   checks: ["High-quality analysis", "Current market prices", "100% free of charge & non-binding"],
 };
@@ -509,13 +532,14 @@ export const FastPropertyTypes = {
  */
 export const evaluation = {
   title: "Start your free evaluation now",
-  id: "0",
+  id: "evaluation",
   layer: "root",
   items: [
     {
-      id: "0-0",
+      id: "personal_rating",
       next: PersonalPropertyTypes,
       title: "Personal Rating",
+      text: "Personal",
       icon: faceSvg,
       checks: ["Precise", "Local", "For free"],
       style: {
@@ -526,9 +550,10 @@ export const evaluation = {
       },
     },
     {
-      id: "0-1",
+      id: "online_review",
       next: FastPropertyTypes,
       title: "Online Review",
+      text: "Online",
       icon: mobileHandSvg,
       checks: ["Value range", "in 2 minutes", "For free"],
       style: {

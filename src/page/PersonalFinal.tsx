@@ -4,6 +4,7 @@ import two from "../assets/personal-final-2.svg";
 import three from "../assets/personal-final-3.svg";
 import four from "../assets/personal-final-4.svg";
 import { useEffect, useState } from "react";
+import { ReactSVG } from "react-svg";
 
 interface RealEstate {
   [key: string]: number | string | null | undefined | object; // Adjust this type based on your actual data structure
@@ -43,10 +44,18 @@ export default function PersonalFinal({
             We have thousands of apartments and houses throughout Germany on offer for you.
           </p>
           <div className='flex gap-2 justify-center'>
-            <img src={one} alt='1' />
-            <img src={two} alt='1' />
-            <img src={three} alt='1' />
-            <img src={four} alt='1' />
+            <ReactSVG src={one} beforeInjection={svg => {
+              svg.setAttribute("style", `stroke: ${style.fillColor}`)
+            }}/>
+            <ReactSVG src={two} beforeInjection={svg => {
+              svg.setAttribute("style", `stroke: ${style.fillColor}`)
+            }}/>
+            <ReactSVG src={three} beforeInjection={svg => {
+              svg.setAttribute("style", `stroke: ${style.fillColor}`)
+            }}/>
+            <ReactSVG src={four} beforeInjection={svg => {
+              svg.setAttribute("style", `stroke: ${style.fillColor}`)
+            }}/>
           </div>
           <button className='bg-[#2A88FC] text-white text-lg w-1/2'>Find the right property now</button>
         </div>

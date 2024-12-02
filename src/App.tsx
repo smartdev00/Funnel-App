@@ -14,7 +14,9 @@ import AddressInput from "./page/AddressInput";
 import PersonalFinal from "./page/PersonalFinal";
 import StairInput from "./page/StairInput";
 import { hasError, isNullOrUndefined } from "./utils/function";
-
+import ColorPicker from "./components/ColorPicker";
+import { ReactSVG } from "react-svg";
+import { useColorContext } from "./provider/ColorProvider";
 interface RealEstate {
   [key: string]: number | string | null | undefined | object; // Adjust this type based on your actual data structure
 }
@@ -25,6 +27,7 @@ export default function App() {
   const [history, setHistory] = useState<any>([]);
   const [error, setError] = useState<any>("");
   const [realEstate, setRealEstate] = useState<RealEstate>({});
+  const { bgColor, textColor, fillColor } = useColorContext();
 
   useEffect(() => {
     setProgress(history.length * 5 + 5);
@@ -36,7 +39,7 @@ export default function App() {
   }, [realEstate]);
 
   const onCheckBoxClicked = (id: string, item: any) => {
-    let temp = realEstate[id] ? realEstate[id].toString() : "";
+    let temp = realEstate[id] ? realEstate[id].toString() : "init ";
     console.log("temp", temp);
     if (temp.includes(item.name)) {
       temp = temp.replace(item.name + " ", "");
@@ -60,7 +63,8 @@ export default function App() {
 
   return (
     <>
-      <div className='flex flex-col w-screen justify-center'>
+      <div className='flex flex-col w-screen justify-center relative'>
+        <ColorPicker className='fixed z-50 top-0 right-0' />
         <p className='font-bold mb-4 text-center'>Start your free evaluation now</p>
         <div className='flex gap-4 justify-center'>
           {evaluation.items.map((eva) => {
@@ -77,7 +81,12 @@ export default function App() {
                   {eva.style.title}
                 </p>
                 <p>{eva.title}</p>
-                <img alt='face' src={eva.icon} />
+                <ReactSVG
+                  src={eva.icon}
+                  beforeInjection={(svg) => {
+                    svg.setAttribute("style", `fill: ${fillColor}`);
+                  }}
+                />
                 <div>
                   {eva.checks.map((det) => {
                     return <CheckText key={det} text={det} />;
@@ -122,7 +131,14 @@ export default function App() {
                             className='absolute right-2 bottom-2'
                           />
                         )}
-                        <img className='w-16' src={item.icon} />
+                        {/* <img className='w-16' src={item.icon} /> */}
+                        <ReactSVG
+                          src={item.icon}
+                          width={50}
+                          beforeInjection={(svg) => {
+                            svg.setAttribute("style", `fill: none; stroke: ${fillColor}`);
+                          }}
+                        />
                         <p className='font-bold text-sm whitespace-nowrap'>{item.title}</p>
                       </Card>
                     );

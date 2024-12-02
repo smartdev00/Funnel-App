@@ -1,22 +1,28 @@
 import { Box } from "@mui/system";
 import LinearProgressWithLabel from "./ProgressWithValue";
 import { Check, Close } from "@mui/icons-material";
+import { useColorContext } from "../provider/ColorProvider";
+
 const Modal = ({
   onClose,
   data,
-  //   setData,
+  className,
   children,
   progress,
 }: {
   onClose: () => void;
   data: any;
+  className?: string;
   setData: React.Dispatch<any>;
   children: React.ReactNode;
   progress: number;
 }) => {
+  const { bgColor, textColor } = useColorContext();
   return (
     <div className='fixed w-screen h-screen flex justify-center top-0 bg-black bg-opacity-40'>
-      <div className='relative flex flex-col w-[90%] h-[500px] justify-between items-center mt-40 py-2 px-[2%] max-w-[800px] mx-auto bg-white'>
+      <div
+        className={`relative flex flex-col w-[90%] h-[500px] justify-between items-center mt-40 py-2 px-[2%] max-w-[800px] mx-auto ${className}`}
+        style={{ backgroundColor: bgColor, color: textColor }}>
         {data.successInquiry && (
           <div className='absolute top-0 left-0 right-0 h-20 bg-[#63b65b] flex justify-center items-center gap-2 text-white text-lg font-extrabold z-50'>
             <Check />

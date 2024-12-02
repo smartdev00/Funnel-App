@@ -24,6 +24,7 @@ import month4_6 from "../assets/month-4-6.svg";
 import month6 from "../assets/month-6.svg";
 import monthNot from "../assets/month-not.svg";
 import mapAddress from "../assets/map.svg";
+
 import balcony from "../assets/exterior/exterior-balcony.png";
 import garage from "../assets/exterior/exterior-garage.jpg";
 import garden from "../assets/exterior/exterior-garden.jpg";
@@ -523,6 +524,7 @@ export const PersonalPropertyTypes = {
     { next: largeObjects[0], title: "Land", icon: landSvg, text: "Property" },
     { next: houseTypes[0], title: "House", icon: houseSvg, text: "House" },
     { next: apartmentTypes[0], title: "Apartment", icon: apartmentSvg, text: "Apartment" },
+    { next: BuySell[0], title: "Commercial", icon: commercialSvg, text: "Commercial" },
     { next: BuySell[0], title: "Commercial", icon: commercialSvg, text: "Commercial" },
   ],
   checks: ["High-quality analysis", "Current market prices", "100% free of charge & non-binding"],

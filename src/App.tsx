@@ -14,22 +14,40 @@ import AddressInput from "./page/AddressInput";
 import PersonalFinal from "./page/PersonalFinal";
 import StairInput from "./page/StairInput";
 
+interface RealEstate {
+  [key: string]: number | string | null | undefined | object; // Adjust this type based on your actual data structure
+}
+
 function App() {
   const [modalData, setModalData] = useState<any>();
   const [progress, setProgress] = useState<number>(0);
   const [history, setHistory] = useState<any>([]);
+  const [error, setError] = useState<string>("");
 
-  const [realEstate, setRealEstate] = useState<Object>({})
+  const [realEstate, setRealEstate] = useState<RealEstate>({});
   const [testCheckValue, setTestCheckValue] = useState<boolean>(false);
 
   useEffect(() => {
     setProgress(history.length * 5 + 5);
     if (modalData?.layer === "final") setProgress(100);
-    console.log(history);
   }, [history]);
+
+  useEffect(() => {
+    console.log(realEstate);
+  }, [realEstate]);
 
   const onCheckBoxClicked = () => {
     setTestCheckValue(!testCheckValue);
+  };
+
+  const onCardInModalClick = (item: any) => {
+    if (item?.type === "check") {
+      onCheckBoxClicked();
+    } else {
+      setHistory([...history, modalData]);
+      setModalData(item.next);
+      setRealEstate({ ...realEstate, [modalData?.id]: item?.text });
+    }
   };
 
   return (
@@ -44,6 +62,7 @@ function App() {
                 className={"border-4 relative w-56 " + eva.style.borderColor}
                 onClick={() => {
                   setModalData(eva.next);
+                  setRealEstate({ ...realEstate, [evaluation.id]: eva.text });
                 }}>
                 <p className={`absolute top-0 left-0 px-1 text-sm py-0.5 ${eva.style.bgColor} ${eva.style.color}`}>
                   {eva.style.title}
@@ -61,13 +80,14 @@ function App() {
         </div>
         {modalData && (
           <Modal
-            title='What type of property is it?'
             data={modalData}
             progress={progress}
             setData={setModalData}
             onClose={() => {
               setModalData("");
               setHistory([]);
+              setRealEstate({});
+              setError("");
             }}>
             {modalData.items && (
               <div className='w-[100%]'>
@@ -83,10 +103,7 @@ function App() {
                     return (
                       <Card
                         key={index}
-                        onClick={() => {
-                          item?.type !== "check" && setHistory([...history, modalData]);
-                          item?.type === "check" ? onCheckBoxClicked() : setModalData(item.next);
-                        }}
+                        onClick={() => onCardInModalClick(item)}
                         className='flex-1 w-full h-[150px] relative'>
                         {modalData?.type === "check" && (
                           <input
@@ -114,23 +131,40 @@ function App() {
               modalData?.id === "fast_house_area" ||
               modalData?.id === "fast_apartment_area" ||
               modalData?.id === "fast_built_year") && (
-              <Ground type={modalData?.id} min={modalData?.min} max={modalData?.max} />
+              <Ground
+                type={modalData?.id}
+                min={modalData?.min}
+                max={modalData?.max}
+                setRealEstate={setRealEstate}
+                realEstate={realEstate}
+                error={error}
+                setError={setError}
+              />
             )}
             {(modalData?.id === "personal_ground_postal_input" || modalData?.id === "fast_ground_postal_input") && (
-              <PostalInput type={modalData?.id} />
+              <PostalInput
+                type={modalData?.id}
+                setRealEstate={setRealEstate}
+                realEstate={realEstate}
+                error={error}
+                setError={setError}
+              />
             )}
             {modalData?.id === "recepient_infor" && (
               <RecepientInfor
+                type={modalData?.id}
+                setRealEstate={setRealEstate}
+                realEstate={realEstate}
                 onClick={() => {
                   setHistory([...history, modalData]);
                   setModalData(modalData?.next);
                 }}></RecepientInfor>
             )}
             {(modalData?.id === "personal_address_input" || modalData?.id === "fast_address_input") && (
-              <AddressInput type={modalData?.id} />
+              <AddressInput type={modalData?.id} realEstate={realEstate} setRealEstate={setRealEstate} />
             )}
             {(modalData?.id === "personal_buy_final" || modalData?.id === "personal_sell_final") && (
-              <PersonalFinal data={modalData} />
+              <PersonalFinal type={modalData?.id} realEstate={realEstate} setRealEstate={setRealEstate} />
             )}
 
             <div className='justify-self-end flex justify-between w-[96%] items-center h-16'>
@@ -146,7 +180,7 @@ function App() {
                   <ArrowBack />
                 </button>
               )}
-              {modalData.next && (
+              {modalData.next && modalData?.id !== "recepient_infor" && (
                 <Button
                   variant='contained'
                   size='large'

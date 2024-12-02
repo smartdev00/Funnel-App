@@ -3,9 +3,79 @@ import { TextField } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useEffect, useState } from "react";
 
-const RecepientInfor = ({ value, onClick }: { value?: number; onClick: () => void }) => {
+interface RealEstate {
+  [key: string]: number | string | null | undefined | object; // Adjust this type based on your actual data structure
+}
+
+interface Estate {
+  gender: string;
+  name: string;
+  phoneNumber: string;
+  email: string;
+}
+
+const RecepientInfor = ({
+  type,
+  onClick,
+  realEstate,
+  setRealEstate,
+}: {
+  type: string;
+  value?: string;
+  onClick: () => void;
+  realEstate: RealEstate;
+  setRealEstate: React.Dispatch<React.SetStateAction<RealEstate>>;
+}) => {
+  const [recepientData, setRecepientData] = useState<{
+    gender: string;
+    name: string;
+    phoneNumber: string;
+    email: string;
+  }>({
+    gender: "Male",
+    name: "",
+    phoneNumber: "",
+    email: "",
+  });
+
+  useEffect(() => {
+    const estate = realEstate[type] as Estate | null;
+
+    if (estate) {
+      setRecepientData({
+        ...recepientData,
+        gender: estate.gender || "Male",
+        name: estate.name || "",
+        phoneNumber: estate.phoneNumber || "",
+        email: estate.email || "",
+      });
+    } else {
+      setRecepientData({
+        ...recepientData,
+        gender: "Male",
+        name: "",
+        phoneNumber: "",
+        email: "",
+      });
+    }
+  }, [realEstate, type]);
+
+  const handleGenderChange = (e: SelectChangeEvent<string>) => {
+    setRecepientData({ ...recepientData, gender: e.target.value });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setRecepientData({ ...recepientData, [e.target.name]: e.target.value });
+  };
+
+  const handleClick = () => {
+    setRealEstate({ ...realEstate, [type]: recepientData });
+    onClick();
+  };
+
   return (
     <div className='flex flex-col items-start w-full flex-auto'>
       <div className='flex items-start gap-10 w-full h-[232px]'>
@@ -16,17 +86,37 @@ const RecepientInfor = ({ value, onClick }: { value?: number; onClick: () => voi
               <Select
                 labelId='demo-simple-select-filled-label'
                 id='demo-simple-select-filled'
-                value={value}
-                //   onChange={handleChange}
-              >
-                <MenuItem value={10}>Male</MenuItem>
-                <MenuItem value={20}>Female</MenuItem>
+                value={recepientData.gender}
+                onChange={handleGenderChange}>
+                <MenuItem value={"Male"}>Male</MenuItem>
+                <MenuItem value={"Female"}>Female</MenuItem>
               </Select>
             </FormControl>
-            <TextField label='Recepient Name' variant='filled' className='w-full' />
+            <TextField
+              label='Recepient Name'
+              variant='filled'
+              className='w-full'
+              name='name'
+              value={recepientData.name}
+              onChange={handleChange}
+            />
           </div>
-          <TextField label='Telephone number*' variant='filled' />
-          <TextField label='Email*' variant='filled' />
+          <TextField
+            label='Telephone number*'
+            variant='filled'
+            name='phoneNumber'
+            type='tel'
+            value={recepientData.phoneNumber}
+            onChange={handleChange}
+          />
+          <TextField
+            label='Email*'
+            variant='filled'
+            type='email'
+            name='email'
+            value={recepientData.email}
+            onChange={handleChange}
+          />
         </div>
         <img alt='map' src={estimation} className='w-80' />
       </div>
@@ -38,7 +128,7 @@ const RecepientInfor = ({ value, onClick }: { value?: number; onClick: () => voi
           price. The Homeday privacy policy applies.
         </span>
       </div>
-      <button className='bg-gray-200 self-center mt-2' onClick={onClick}>
+      <button className='bg-gray-200 self-center mt-2' onClick={handleClick}>
         Receive a free evaluation
       </button>
     </div>

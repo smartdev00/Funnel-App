@@ -28,7 +28,7 @@ export default function PersonalFinal({
   realEstate: RealEstate;
   setRealEstate: React.Dispatch<React.SetStateAction<RealEstate>>;
 }) {
-  const { fillColor } = useColorContext();
+  const { strokeColor } = useColorContext();
   const [telNum, setTelNum] = useState<string>("");
   useEffect(() => {
     setTelNum((realEstate[type] as string) ?? "");
@@ -49,25 +49,25 @@ export default function PersonalFinal({
             <ReactSVG
               src={one}
               beforeInjection={(svg) => {
-                svg.setAttribute("style", `stroke: ${fillColor}`);
+                svg.setAttribute("style", `stroke: ${strokeColor}; fill: ${strokeColor}`);
               }}
             />
             <ReactSVG
               src={two}
               beforeInjection={(svg) => {
-                svg.setAttribute("style", `stroke: ${fillColor}`);
+                svg.setAttribute("style", `stroke: ${strokeColor}; fill: ${strokeColor}`);
               }}
             />
             <ReactSVG
               src={three}
               beforeInjection={(svg) => {
-                svg.setAttribute("style", `stroke: ${fillColor}`);
+                svg.setAttribute("style", `stroke: ${strokeColor}; fill: ${strokeColor}`);
               }}
             />
             <ReactSVG
               src={four}
               beforeInjection={(svg) => {
-                svg.setAttribute("style", `stroke: ${fillColor}`);
+                svg.setAttribute("style", `stroke: ${strokeColor}; fill: ${strokeColor}`);
               }}
             />
           </div>

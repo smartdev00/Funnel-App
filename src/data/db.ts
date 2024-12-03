@@ -19,6 +19,7 @@ import loft from "../assets/loft.svg";
 import mainsonette from "../assets/mainsonette.svg";
 import souterrain from "../assets/souterrain.svg";
 import largeGround from "../assets/large-ground.svg";
+
 import month1_3 from "../assets/month-1-3.svg";
 import month4_6 from "../assets/month-4-6.svg";
 import month6 from "../assets/month-6.svg";

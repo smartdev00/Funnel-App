@@ -26,25 +26,18 @@ export default function App() {
   const [history, setHistory] = useState<any>([]);
   const [error, setError] = useState<any>("");
   const [realEstate, setRealEstate] = useState<RealEstate>({});
-  const { fillColor, strokeColor } = useColorContext();
+  const { strokeColor } = useColorContext();
 
   useEffect(() => {
     setProgress(history.length * 5 + 5);
     if (modalData?.layer === "final") setProgress(100);
   }, [history]);
 
-  useEffect(() => {
-    console.log(realEstate);
-  }, [realEstate]);
-
   const onCheckBoxClicked = (id: string, item: any) => {
     let temp = realEstate[id] ? realEstate[id].toString() : "init ";
-    console.log("temp", temp);
     if (temp.includes(item.name)) {
       temp = temp.replace(item.name + " ", "");
-      console.log(temp);
     } else {
-      console.log("Set", item.name);
       temp += item.name + " ";
     }
     setRealEstate({ ...realEstate, [id]: temp });
@@ -135,7 +128,7 @@ export default function App() {
                           src={item.icon}
                           width={96}
                           beforeInjection={(svg) => {
-                            svg.setAttribute("style", `fill: ${fillColor}; stroke: ${strokeColor}`);
+                            svg.setAttribute("style", `fill: ${strokeColor}; stroke: ${strokeColor}`);
                           }}
                         />
                         <p className='font-bold text-sm whitespace-nowrap'>{item.title}</p>
@@ -202,6 +195,12 @@ export default function App() {
                 <button
                   className='justify-self-start'
                   onClick={() => {
+                    const temp1 = { ...realEstate };
+                    if (temp1.hasOwnProperty(modalData?.id)) {
+                      delete temp1[modalData?.id];
+                      setRealEstate({ ...temp1 });
+                    }
+                    setError("");
                     setModalData(history[history.length - 1]);
                     const temp = [...history];
                     temp.pop();
@@ -239,7 +238,6 @@ export default function App() {
                           setModalData(modalData?.next);
                         }
                       }
-                      console.log(hasError(tempError), tempError, error);
                     }
                   }}>
                   Next

@@ -2,6 +2,8 @@ import { TextField, Slider } from "@mui/material";
 import ground from "../assets/large-ground.svg";
 import { useEffect } from "react";
 import { isInteger } from "../utils/function";
+import { ReactSVG } from "react-svg";
+import { useColorContext } from "../provider/ColorProvider";
 interface RealEstate {
   [key: string]: number | string | null | undefined | object; // Adjust this type based on your actual data structure
 }
@@ -25,6 +27,7 @@ const Ground = ({
 }) => {
   const unit = type === "fast_built_year" ? "" : "m²";
   const placeholder = type === "fast_built_year" ? "Year" : "Area";
+  const { strokeColor } = useColorContext();
 
   useEffect(() => {
     setRealEstate({ ...realEstate, [type]: realEstate[type] ?? min });
@@ -46,13 +49,19 @@ const Ground = ({
     setRealEstate({ ...realEstate, [type]: temp });
   };
 
-  const onSlideChange = (e: Event, value: number | number[]) => {
+  const onSlideChange = (_: Event, value: number | number[]) => {
     setRealEstate({ ...realEstate, [type]: value as number });
     setError("");
   };
   return type === "personal_ground_area" ? (
     <div className='border flex flex-col justify-center items-center px-5 py-3'>
-      <img src={ground} className='w-28' />
+      <ReactSVG
+        src={ground}
+        className='w-28'
+        beforeInjection={(svg) => {
+          svg.setAttribute("style", `fill: ${strokeColor};}`);
+        }}
+      />
       <div className='flex items-center justify-between w-full'>
         <p>Land Area</p>
         <TextField

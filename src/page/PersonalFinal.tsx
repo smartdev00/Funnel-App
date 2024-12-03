@@ -5,6 +5,7 @@ import three from "../assets/personal-final-3.svg";
 import four from "../assets/personal-final-4.svg";
 import { useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
+import { useColorContext } from "../provider/ColorProvider";
 
 interface RealEstate {
   [key: string]: number | string | null | undefined | object; // Adjust this type based on your actual data structure
@@ -27,6 +28,7 @@ export default function PersonalFinal({
   realEstate: RealEstate;
   setRealEstate: React.Dispatch<React.SetStateAction<RealEstate>>;
 }) {
+  const { fillColor } = useColorContext();
   const [telNum, setTelNum] = useState<string>("");
   useEffect(() => {
     setTelNum((realEstate[type] as string) ?? "");
@@ -44,18 +46,30 @@ export default function PersonalFinal({
             We have thousands of apartments and houses throughout Germany on offer for you.
           </p>
           <div className='flex gap-2 justify-center'>
-            <ReactSVG src={one} beforeInjection={svg => {
-              svg.setAttribute("style", `stroke: ${style.fillColor}`)
-            }}/>
-            <ReactSVG src={two} beforeInjection={svg => {
-              svg.setAttribute("style", `stroke: ${style.fillColor}`)
-            }}/>
-            <ReactSVG src={three} beforeInjection={svg => {
-              svg.setAttribute("style", `stroke: ${style.fillColor}`)
-            }}/>
-            <ReactSVG src={four} beforeInjection={svg => {
-              svg.setAttribute("style", `stroke: ${style.fillColor}`)
-            }}/>
+            <ReactSVG
+              src={one}
+              beforeInjection={(svg) => {
+                svg.setAttribute("style", `stroke: ${fillColor}`);
+              }}
+            />
+            <ReactSVG
+              src={two}
+              beforeInjection={(svg) => {
+                svg.setAttribute("style", `stroke: ${fillColor}`);
+              }}
+            />
+            <ReactSVG
+              src={three}
+              beforeInjection={(svg) => {
+                svg.setAttribute("style", `stroke: ${fillColor}`);
+              }}
+            />
+            <ReactSVG
+              src={four}
+              beforeInjection={(svg) => {
+                svg.setAttribute("style", `stroke: ${fillColor}`);
+              }}
+            />
           </div>
           <button className='bg-[#2A88FC] text-white text-lg w-1/2'>Find the right property now</button>
         </div>

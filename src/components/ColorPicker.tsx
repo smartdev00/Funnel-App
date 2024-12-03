@@ -1,8 +1,8 @@
-import { isValidColor } from "../utils/function";
 import { useColorContext } from "../provider/ColorProvider";
 
 export default function ColorPicker({ className }: { className: string }) {
-  const { bgColor, textColor, fillColor, setBgColor, setTextColor, setFillColor } = useColorContext();
+  const { bgColor, textColor, fillColor, strokeColor, setBgColor, setTextColor, setFillColor, setStrokeColor } =
+    useColorContext();
 
   return (
     <div className={`${className} flex flex-col gap-1 border bg-white border-black p-2`}>
@@ -22,7 +22,7 @@ export default function ColorPicker({ className }: { className: string }) {
       </div> */}
       <div className='flex gap-2'>
         <div className='flex flex-col gap-1'>
-          <div className='flex gap-2 justify-between items-center w-[170px]'>
+          <div className='flex gap-2 justify-between items-center w-[200px]'>
             <p>Back Color: </p>
             <input
               className='border border-black outline-none px-2 py-1 text-xs h-6 w-20'
@@ -30,7 +30,7 @@ export default function ColorPicker({ className }: { className: string }) {
               onChange={(e) => setBgColor(e.target.value)}
             />
           </div>
-          <div className='flex gap-2 justify-between items-center w-[170px]'>
+          <div className='flex gap-2 justify-between items-center w-[200px]'>
             <p>Text Color: </p>
             <input
               className='border border-black outline-none px-2 py-1 text-xs h-6 w-20'
@@ -46,7 +46,7 @@ export default function ColorPicker({ className }: { className: string }) {
         </div>
       </div>
       <div className='flex gap-2'>
-        <div className='flex gap-2 justify-between items-center w-[170px]'>
+        <div className='flex gap-2 justify-between items-center w-[200px]'>
           <p>Fill Color: </p>
           <input
             className='border border-black outline-none px-2 py-1 text-xs h-6 w-20'
@@ -57,6 +57,20 @@ export default function ColorPicker({ className }: { className: string }) {
         <div
           className={`w-6 h-6 border-2 border-black text-3xl flex justify-center items-center`}
           style={{ backgroundColor: fillColor }}
+        />
+      </div>
+      <div className='flex gap-2'>
+        <div className='flex gap-2 justify-between items-center w-[200px]'>
+          <p>Stroke Color: </p>
+          <input
+            className='border border-black outline-none px-2 py-1 text-xs h-6 w-20'
+            value={strokeColor}
+            onChange={(e) => setStrokeColor(e.target.value)}
+          />
+        </div>
+        <div
+          className={`w-6 h-6 border-2 border-black text-3xl flex justify-center items-center`}
+          style={{ backgroundColor: strokeColor }}
         />
       </div>
     </div>

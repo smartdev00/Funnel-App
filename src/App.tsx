@@ -1,4 +1,3 @@
-// import { useState } from 'react'
 import { evaluation } from "./data/db";
 import "./App.css";
 import Card from "./components/Card";
@@ -27,7 +26,7 @@ export default function App() {
   const [history, setHistory] = useState<any>([]);
   const [error, setError] = useState<any>("");
   const [realEstate, setRealEstate] = useState<RealEstate>({});
-  const { bgColor, textColor, fillColor } = useColorContext();
+  const { fillColor, strokeColor } = useColorContext();
 
   useEffect(() => {
     setProgress(history.length * 5 + 5);
@@ -83,9 +82,9 @@ export default function App() {
                 <p>{eva.title}</p>
                 <ReactSVG
                   src={eva.icon}
-                  beforeInjection={(svg) => {
-                    svg.setAttribute("style", `fill: ${fillColor}`);
-                  }}
+                  // beforeInjection={(svg) => {
+                  //   svg.setAttribute("style", `fill: ${fillColor};`);
+                  // }}
                 />
                 <div>
                   {eva.checks.map((det) => {
@@ -134,9 +133,9 @@ export default function App() {
                         {/* <img className='w-16' src={item.icon} /> */}
                         <ReactSVG
                           src={item.icon}
-                          width={50}
+                          width={96}
                           beforeInjection={(svg) => {
-                            svg.setAttribute("style", `fill: none; stroke: ${fillColor}`);
+                            svg.setAttribute("style", `fill: ${fillColor}; stroke: ${strokeColor}`);
                           }}
                         />
                         <p className='font-bold text-sm whitespace-nowrap'>{item.title}</p>

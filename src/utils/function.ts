@@ -101,3 +101,8 @@ export function hasError(value: any) {
   // If it's not null, undefined, empty string, or an object, return false
   return false;
 }
+
+export const isValidColor = (event: string) => {
+  // Validate if the input is a valid hex color
+  return /^#([0-9A-F]{3}|[0-9A-F]{6})$/i.test(event);
+};

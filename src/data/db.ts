@@ -24,30 +24,35 @@ import month4_6 from "../assets/month-4-6.svg";
 import month6 from "../assets/month-6.svg";
 import monthNot from "../assets/month-not.svg";
 import mapAddress from "../assets/map.svg";
-import balcony from "../assets/exterior/exterior-balcony.png";
-import garage from "../assets/exterior/exterior-garage.jpg";
-import garden from "../assets/exterior/exterior-garden.jpg";
-import solar from "../assets/exterior/exterior-solar.jpg";
-import park from "../assets/exterior/exterior-park.jpg";
-import terrace from "../assets/exterior/exterior-terrace.jpg";
-import modernize1_3 from "../assets/modernize/modernize-1-3.jpg";
-import modernize4_9 from "../assets/modernize/modernize-4-9.jpg";
-import modernize10_15 from "../assets/modernize/modernize-10-15.jpg";
-import modernize15 from "../assets/modernize/modernize-15.jpg";
-import modernizeNot from "../assets/modernize/modernize-not.jpg";
-import interiorElevator from "../assets/interior/interior-elevator.jpg";
-import interiorAttic from "../assets/interior/interior-attic.png";
-import interiorCellar from "../assets/interior/interior-cellar.jpg";
-import interiorFireplace from "../assets/interior/interior-fireplace.png";
-import interiorKitchen from "../assets/interior/interior-kitchen.png";
-import interiorParquet from "../assets/interior/interior-parquet.png";
-import qualitySimple from "../assets/quality/quality-simple.png";
-import qualityNormal from "../assets/quality/quality-normal.jpg";
-import qualityUpscale from "../assets/quality/quality-upscale.png";
-import qualityLuxury from "../assets/quality/quality-luxury.png";
-import purposeOwn from "../assets/purpose/purpose-self.jpg";
-import purposeVarcant from "../assets/purpose/purpose-varcant.png";
-import purposeRented from "../assets/purpose/purpose-rented.png";
+
+import balcony from "../assets/exterior/exterior-balcony.svg";
+import garage from "../assets/exterior/exterior-garage.svg";
+import garden from "../assets/exterior/exterior-garden.svg";
+import solar from "../assets/exterior/exterior-solar.svg";
+import park from "../assets/exterior/exterior-park.svg";
+import terrace from "../assets/exterior/exterior-terrace.svg";
+
+import modernize1_3 from "../assets/modernize/modernize-1-3.svg";
+import modernize4_9 from "../assets/modernize/modernize-4-9.svg";
+import modernize10_15 from "../assets/modernize/modernize-10-15.svg";
+import modernize15 from "../assets/modernize/modernize-15.svg";
+import modernizeNot from "../assets/modernize/modernize-not.svg";
+
+import interiorElevator from "../assets/interior/interior-elevator.svg";
+import interiorAttic from "../assets/interior/interior-attic.svg";
+import interiorCellar from "../assets/interior/interior-cellar.svg";
+import interiorFireplace from "../assets/interior/interior-fireplace.svg";
+import interiorKitchen from "../assets/interior/interior-kitchen.svg";
+import interiorParquet from "../assets/interior/interior-parquet.svg";
+
+import qualitySimple from "../assets/quality/quality-simple.svg";
+import qualityNormal from "../assets/quality/quality-normal.svg";
+import qualityUpscale from "../assets/quality/quality-upscale.svg";
+import qualityLuxury from "../assets/quality/quality-luxury.svg";
+
+import purposeOwn from "../assets/purpose/purpose-self.svg";
+import purposeVarcant from "../assets/purpose/purpose-varcant.svg";
+import purposeRented from "../assets/purpose/purpose-rented.svg";
 
 const PersonalFinal = [
   {
@@ -302,7 +307,7 @@ const InteriorFeature = {
   ],
 };
 
-const ExteriorFeature = {
+export const ExteriorFeature = {
   title: "What exterior features does your property have?",
   next: InteriorFeature,
   id: "fast_exterior_feature",

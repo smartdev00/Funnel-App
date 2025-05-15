@@ -106,3 +106,10 @@ export const isValidColor = (event: string) => {
   // Validate if the input is a valid hex color
   return /^#([0-9A-F]{3}|[0-9A-F]{6})$/i.test(event);
 };
+
+export function getUrl(content: any) {
+  const blob = new Blob([JSON.stringify(content)], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  // const a = document.createElement("a");
+  return url;
+}

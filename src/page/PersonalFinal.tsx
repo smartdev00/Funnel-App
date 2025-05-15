@@ -6,6 +6,7 @@ import four from "../assets/personal-final-4.svg";
 import { useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { useColorContext } from "../provider/ColorProvider";
+import { getUrl } from "../utils/function";
 
 interface RealEstate {
   [key: string]: number | string | null | undefined | object; // Adjust this type based on your actual data structure
@@ -71,7 +72,12 @@ export default function PersonalFinal({
               }}
             />
           </div>
-          <button className='bg-[#2A88FC] text-white text-lg w-1/2'>Find the right property now</button>
+          <a
+            className='bg-[#2A88FC] text-white text-lg w-1/2 text-center py-3 rounded-xl hover:text-gray-200 transition-all'
+            href={getUrl(realEstate)}
+            download='funnel.json'>
+            Find the right property now
+          </a>
         </div>
       )}
       {type === "alternative_phone_number" && (
@@ -98,7 +104,12 @@ export default function PersonalFinal({
             current market price. The Homeday{" "}
             <Link href='https://www.homeday.de/de/datenschutz/'>data protection regulations</Link> apply.
           </span>
-          <button className='bg-[#2A88FC] text-white text-lg px-10'>Next</button>
+          <a
+            className='bg-[#2A88FC] text-white text-lg w-1/2 text-center py-3 rounded-xl hover:text-gray-200 transition-all'
+            href={getUrl(realEstate)}
+            download='funnel.json'>
+            Next
+          </a>
         </div>
       )}
     </div>
